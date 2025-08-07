@@ -3,6 +3,8 @@
 #include <ctype.h>
 
 typedef enum {
+    TOKEN_LPAREN,
+    TOKEN_RPAREN,
     TOKEN_NUMBER,
     TOKEN_OPERATOR,
     TOKEN_END,
@@ -13,6 +15,7 @@ typedef struct {
     TokenType type;
     double value;
     char operator;
+    char par;
 } Token;
 
 int is_operator(char c) {
@@ -35,6 +38,23 @@ Token get_next_token(const char **expression) {
         return token;
     }
    
+        //si il y a une parenthèse
+    if (*expr == '(') {    // parenthèse gauche
+        token.type = TOKEN_LPAREN;
+        token.par = '(';   
+        expr++;                     
+        *expression = expr;         
+        return token;              
+    }
+
+    if (*expr == ')') {             // parenthèse droite
+        token.type = TOKEN_RPAREN;
+        token.par = ')';            
+        expr++;                      
+        *expression = expr;         
+        return token;                
+    }
+
     // Nombre multi-chiffres
     if (isdigit(*expr)) {
         char number_str[64];
