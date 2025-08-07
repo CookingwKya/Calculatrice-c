@@ -49,9 +49,23 @@ Token get_next_token(const char **expression) {
         token.type = TOKEN_NUMBER;
         token.value = atof(number_str);
         *expression = expr;
-        return token;
+        
+  //si il s'agit d'un nombre décimal
+       
+            if (*expr== '.'){
+                number_str[i++]='.';
+                expr++;
+                while (isdigit(*expr)) {
+                    number_str[i++] = *expr++;
+                }
+                number_str[i] = '\0';
+                token.type = TOKEN_NUMBER;
+                token.value = atof(number_str);
+                *expression = expr;           
+            }   
+       return token;
     }
-    
+
     // Opérateur
     if (is_operator(*expr)) {
         token.type = TOKEN_OPERATOR;
