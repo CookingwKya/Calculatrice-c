@@ -22,50 +22,47 @@ int is_operator(char c) {
 Token get_next_token(const char **expression) {
     Token token;
     const char *expr = *expression;
-    
+   
     // Ignorer les espaces
     while (*expr == ' ') {
         expr++;
     }
-    
+   
     // Fin de chaîne
     if (*expr == '\0') {
         token.type = TOKEN_END;
         *expression = expr;
         return token;
     }
-    
+   
     // Nombre multi-chiffres
     if (isdigit(*expr)) {
         char number_str[64];
         int i = 0;
-        
+       
         // Lire tous les chiffres consécutifs
         while (isdigit(*expr)) {
             number_str[i++] = *expr++;
         }
+       
+        // Si il s'agit d'un nombre décimal
+        if (*expr == '.') {
+            number_str[i++] = '.';
+            expr++;
+            while (isdigit(*expr)) {
+                number_str[i++] = *expr++;
+            }
+        }
+        
+        // Terminer la chaîne UNE SEULE FOIS
         number_str[i] = '\0';
         
         token.type = TOKEN_NUMBER;
         token.value = atof(number_str);
         *expression = expr;
-        
-  //si il s'agit d'un nombre décimal
-       
-            if (*expr== '.'){
-                number_str[i++]='.';
-                expr++;
-                while (isdigit(*expr)) {
-                    number_str[i++] = *expr++;
-                }
-                number_str[i] = '\0';
-                token.type = TOKEN_NUMBER;
-                token.value = atof(number_str);
-                *expression = expr;           
-            }   
-       return token;
+        return token;
     }
-
+    
     // Opérateur
     if (is_operator(*expr)) {
         token.type = TOKEN_OPERATOR;
@@ -74,7 +71,7 @@ Token get_next_token(const char **expression) {
         *expression = expr;
         return token;
     }
-    
+   
     // Caractère non reconnu
     token.type = TOKEN_ERROR;
     *expression = expr;
