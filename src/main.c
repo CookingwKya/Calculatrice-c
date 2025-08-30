@@ -35,9 +35,9 @@ int main() {
                 printf("  FIN\n");
                 break;
             } else {
-        printf("  ERREUR\n");
-        break;
-}
+                printf("  ERREUR\n");
+                break;
+            }
         }
         printf("\n");
     }

@@ -76,7 +76,7 @@ Token get_next_token(const char **expression) {
         
         // Terminer la chaîne UNE SEULE FOIS
         number_str[i] = '\0';
-        
+
         token.type = TOKEN_NUMBER;
         token.value = atof(number_str);
         *expression = expr;
@@ -97,3 +97,10 @@ Token get_next_token(const char **expression) {
     *expression = expr;
     return token;
 }
+
+
+
+
+
+
+
