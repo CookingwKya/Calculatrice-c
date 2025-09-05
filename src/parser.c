@@ -1,26 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-
-typedef enum {
-    TOKEN_LPAREN,
-    TOKEN_RPAREN,
-    TOKEN_NUMBER,
-    TOKEN_OPERATOR,
-    TOKEN_END,
-    TOKEN_ERROR,
-} TokenType;
-
-typedef struct {
-    TokenType type;
-    double value;
-    char operator;
-    char par;
-} Token;
-
-int is_operator(char c) {
-    return (c == '+' || c == '-' || c == '*' || c == '/');
-}
+#include "types.h"
+#include "utils.h"
 
 Token get_next_token(const char **expression) {
     Token token;
@@ -38,8 +20,8 @@ Token get_next_token(const char **expression) {
         return token;
     }
    
-        //si il y a une parenthèse
-    if (*expr == '(') {    // parenthèse gauche
+    // Si il y a une parenthèse
+    if (*expr == '(') {
         token.type = TOKEN_LPAREN;
         token.par = '(';   
         expr++;                     
@@ -47,7 +29,7 @@ Token get_next_token(const char **expression) {
         return token;              
     }
 
-    if (*expr == ')') {             // parenthèse droite
+    if (*expr == ')') {
         token.type = TOKEN_RPAREN;
         token.par = ')';            
         expr++;                      
@@ -74,7 +56,7 @@ Token get_next_token(const char **expression) {
             }
         }
         
-        // Terminer la chaîne UNE SEULE FOIS
+        // Terminer la chaîne
         number_str[i] = '\0';
 
         token.type = TOKEN_NUMBER;
@@ -97,10 +79,3 @@ Token get_next_token(const char **expression) {
     *expression = expr;
     return token;
 }
-
-
-
-
-
-
-
