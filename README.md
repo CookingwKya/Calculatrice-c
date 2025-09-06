@@ -1,8 +1,8 @@
 Hello there, this repo is my first programming project, i realised a calulator using command line built in C. 
 It manages basic operations like '+,-,*,/,%,^".
-cette calculatrice gère egalement les priorités liees aux parenthèses.
 
-j'ai implementé un fichier qui joue un role de parsing, c'est à dire qu'il identifie les caractères entrés en ligne de commande par l'utilisateur.
-Puis un fichier qui évalue les expressions, c'est la partie cruciale de la calculatrice, elle permet d'evaluer les priorités d'operateurs et de stocker les operateurs prioritaires dans des piles ainsi que les nombres qui vont avec. Avant de les calculer et de retourner le résultat de l'operation.
-et un fichier main.c qui représente "l'interface utilisateur". Les resultats des opeerations sont affichées là.
+This calculator also handles parenthetical priorities.
 
+I implemented a file that acts as a parser, meaning it identifies the characters entered on the command line by the user.
+Then there's a file that evaluates expressions. This is the crucial part of the calculator. It evaluates operator priorities and stores the prioritized operators in stacks, along with the associated numbers. This file then calculates them and returns the result of the operation.
+And a main.c file that represents the "user interface." The results of the operations are displayed there.
